@@ -58,6 +58,11 @@
 			 		    update=":reservationTable" />
 			</f:facet>
 		</h:panelGrid>
+		
+		<p:commandButton value="Reservierung speichern"
+						action="#{reservationBean.createReservation}"
+						process=":reservationForm"
+			 		    update=":reservationTable" />
 		</h:form>
 	</h:body>
 </f:view>
