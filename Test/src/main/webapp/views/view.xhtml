@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head />
+	<h:body>
+		Meine Reservierungen<br />
+		<p:dataTable var="element" value="#{reservationBean.myReservations}" id="reservationTable">
+			<p:column>
+	            <f:facet name="header">
+	                <h:outputText value="Id" />
+	            </f:facet>
+	            <h:outputText value="#{element.id}" />
+	        </p:column>
+	 
+	        <p:column>
+	            <f:facet name="header">
+	                <h:outputText value="Datum"/>
+	            </f:facet>
+	            <h:outputText value="#{element.crdate}" />
+	        </p:column>
+	 
+	        <p:column>
+	            <f:facet name="header">
+	                <h:outputText value="Name" />
+	            </f:facet>
+	            <h:outputText value="#{element.bezng}" />
+	        </p:column>
+		</p:dataTable>
+		
+		<br />
+		<br />
+		
+		<h:form id="reservationForm">
+		<h:panelGrid columns="2" columnClasses="label, value" id="saveReservation">
+			<h:outputText value="Bezeichnung" />
+			<p:inputText value="#{reservationBean.reservation.bezng}" />
+			
+			<h:outputText value="Beschreibung" />
+			<p:inputText value="#{reservationBean.reservation.beschr}" />
+			
+			<h:outputText value="Datum" />
+			<p:calendar value="#{reservationBean.reservation.crdate}" language="de">
+				<f:convertDateTime type="date" pattern="yyyy-mm-dd HH:ii:ss"/>
+			</p:calendar>
+				
+			<f:facet name="footer">
+				<p:commandButton value="Reservierung speichern"
+						action="#{reservationBean.createReservation}"
+						process=":reservationForm"
+			 		    update=":reservationTable" />
+			</f:facet>
+		</h:panelGrid>
+		</h:form>
+	</h:body>
+</f:view>
